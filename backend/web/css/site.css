@@ -1,0 +1,26 @@
+main {
+    flex: 1;
+}
+
+aside {
+    min-width: 180px;
+}
+
+aside .nav-pills .nav-link {
+    border-radius: 0;
+    color: #444;
+}
+
+aside .nav-pills .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+aside .nav-pills .nav-link.active {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #b90000;
+    border-left: 4px solid #b90000;
+}
+
+.content-wrapper {
+    flex: 1;
+}
