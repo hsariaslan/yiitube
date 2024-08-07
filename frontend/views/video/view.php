@@ -2,6 +2,9 @@
 /**
  * @var $model \common\models\Video
  */
+
+use yii\helpers\Html;
+
 ?>
 
 <div class="row">
@@ -22,6 +25,16 @@
                 <?= $this->render('_like_buttons', ['model' => $model]) ?>
                 <?php \yii\widgets\Pjax::end() ?>
             </div>
+        </div>
+        <div>
+            <p><?= Html::a($model->createdBy->username, [
+                    'channel/view', 'username' => $model->createdBy->username,
+                ]) ?></p>
+            <p>
+                <?=($model->description)
+                    ? Html::encode($model->description)
+                    : 'No description.'?>
+            </p>
         </div>
     </div>
     <div class="col-sm-4"></div>
