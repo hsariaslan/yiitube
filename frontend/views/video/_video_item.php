@@ -4,7 +4,7 @@
  */
 ?>
 
-<a class="card m-2 text-decoration-none" href="<?= \yii\helpers\Url::to(['/video/view', 'video_id' => $model->video_id]) ?>" style="width: 245px;">
+<a class="card m-2 text-decoration-none" href="<?= \yii\helpers\Url::to(['/video/view', 'videoId' => $model->video_id]) ?>" style="width: 245px;">
     <div class="embed-responsive embed-responsive-16by9">
         <video
             src="<?= $model->getVideoLink() ?>"

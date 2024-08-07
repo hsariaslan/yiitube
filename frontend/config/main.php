@@ -42,7 +42,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'video/view/<video_id>' => 'video/view',
+                'video/view/<videoId>' => 'video/view',
+                'video/like/<videoId>' => 'video/like',
+                'video/dislike/<videoId>' => 'video/dislike',
                 'video/update/<video_id>' => 'video/update',
             ],
         ],

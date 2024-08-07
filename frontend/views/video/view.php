@@ -18,12 +18,9 @@
         <div class="d-flex justify-content-between align-items-center">
             <div><?= $model->getViews()->count() ?> views • <?= Yii::$app->formatter->asDate($model->created_at) ?></div>
             <div>
-                <button class="btn btn-sm btn-outline-primary">
-                    <i class="fa-solid fa-thumbs-up"></i> 9
-                </button>
-                <button class="btn btn-sm btn-outline-secondary">
-                    <i class="fa-solid fa-thumbs-down"></i> 3
-                </button>
+                <?php \yii\widgets\Pjax::begin() ?>
+                <?= $this->render('_like_buttons', ['model' => $model]) ?>
+                <?php \yii\widgets\Pjax::end() ?>
             </div>
         </div>
     </div>
