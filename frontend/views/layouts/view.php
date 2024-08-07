@@ -10,8 +10,6 @@ AppAsset::register($this);
 ?>
 <?php $this->beginContent('@frontend/views/layouts/base.php') ?>
     <main role="main" class="d-flex mt-5">
-        <?= $this->render('sidebar') ?>
-
         <div class="content-wrapper p-3">
             <?= Alert::widget() ?>
             <?= $content ?>

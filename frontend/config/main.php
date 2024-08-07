@@ -11,6 +11,7 @@ return [
     'name' => 'YiiTube',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => '/video/index',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
@@ -41,7 +42,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'video/view/<video_id>' => 'video/view',
+                'video/update/<video_id>' => 'video/update',
             ],
+        ],
+        'assetManager' => [
+            'appendTimestamp' => true,
         ],
     ],
     'params' => $params,
