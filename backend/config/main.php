@@ -42,6 +42,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'video/view/<video_id>' => 'video/view',
+                'video/update/<video_id>' => 'video/update',
             ],
         ],
         'assetManager' => [

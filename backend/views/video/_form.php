@@ -12,23 +12,31 @@ use yii\bootstrap5\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'video_id')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-sm-8">
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+            <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-4">
+            <div class="mb-3">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video src="<?= $model->getVideoLink() ?>" class="embed-responsive-item w-100" controls style="max-height: 350px"></video>
+                </div>
+            </div>
 
-    <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
+            <div class="mb-3">
+                <div class="text-muted">Video Link</div>
+                <a href="<?= $model->getVideoLink() ?>" target="_blank">
+                    <?= $model->getVideoLink() ?>
+                </a>
+            </div>
 
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'has_thumbnail')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+            <?= $form->field($model, 'status')->dropDownList($model->getStatusLabels()) ?>
+        </div>
+    </div>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

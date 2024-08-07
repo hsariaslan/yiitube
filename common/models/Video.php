@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
 
 /**
@@ -22,6 +24,9 @@ use yii\helpers\FileHelper;
  */
 class Video extends \yii\db\ActiveRecord
 {
+    const STATUS_UNLISTED = 0;
+    const STATUS_PUBLISHED = 1;
+
     /**
      * @var \yii\web\UploadedFile
      */
@@ -33,6 +38,17 @@ class Video extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%video}}';
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+            [
+                'class' => BlameableBehavior::class,
+                'updatedByAttribute' => false,
+            ]
+        ];
     }
 
     /**
@@ -49,6 +65,8 @@ class Video extends \yii\db\ActiveRecord
             [['tags'], 'string', 'max' => 512],
             [['video_id'], 'unique'],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            ['status', 'default', 'value' => self::STATUS_UNLISTED],
+            ['has_thumbnail', 'default', 'value' => 0],
         ];
     }
 
@@ -67,6 +85,14 @@ class Video extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function getStatusLabels()
+    {
+        return [
+            self::STATUS_UNLISTED => 'Unlisted',
+            self::STATUS_PUBLISHED => 'Published',
         ];
     }
 
@@ -111,9 +137,18 @@ class Video extends \yii\db\ActiveRecord
                 FileHelper::createDirectory(dirname($videoPath));
             }
 
-            $this->video->saveAs($videoPath);
+            $saveAsVideo = $this->video->saveAs($videoPath);
+
+            if (!$saveAsVideo) {
+                return false;
+            }
         }
 
         return true;
+    }
+
+    public function getVideoLink()
+    {
+        return Yii::$app->params['frontendUrl'].'/storage/videos/' . $this->video_id . '.mp4';
     }
 }
