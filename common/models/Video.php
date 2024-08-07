@@ -176,6 +176,22 @@ class Video extends \yii\db\ActiveRecord
         return true;
     }
 
+    public function afterDelete(): void
+    {
+        parent::afterDelete();
+
+        $videoPath = Yii::getAlias('@frontend/web/storage/videos/' . $this->video_id . '.mp4');
+        $thumbnailPath = Yii::getAlias('@frontend/web/storage/thumbnails/' . $this->video_id . '.jpg');
+
+        if (file_exists($videoPath)) {
+            unlink($videoPath);
+        }
+
+        if (file_exists($thumbnailPath)) {
+            unlink($thumbnailPath);
+        }
+    }
+
     public function getVideoLink()
     {
         return Yii::$app->params['frontendUrl'].'/storage/videos/' . $this->video_id . '.mp4';
