@@ -21,9 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
         <p class="m-0 mt-4">Video dosyalarını yüklemek için sürükleyin ve bırakın</p>
         <p class="text-muted">Videolarınız, siz yayınlayana kadar gizli olarak kalır.</p>
 
-        <?php ActiveForm::begin([
+        <?php $form = ActiveForm::begin([
                 'options' => ['enctype' => 'multipart/form-data'],
         ]); ?>
+
+        <?= $form->errorSummary($model) ?>
 
         <button class="btn btn-primary btn-file">
             Select File
