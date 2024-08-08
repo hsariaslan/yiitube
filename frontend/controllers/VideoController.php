@@ -39,6 +39,9 @@ class VideoController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Video::find()->published()->latest(),
+            'pagination' => [
+                'pageSize' => 10,
+            ]
         ]);
 
         return $this->render('index', [
