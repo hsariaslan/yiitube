@@ -69,18 +69,6 @@ class VideoController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Video model.
-     * @param string $video_id Video ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($video_id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($video_id),
-        ]);
-    }
 
     /**
      * Creates a new Video model.
