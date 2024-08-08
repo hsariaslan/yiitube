@@ -117,12 +117,12 @@ class Video extends \yii\db\ActiveRecord
         return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
-    public function isLikedBy(int $userId)
+    public function isLikedBy($userId)
     {
         return VideoLike::find()->byLike()->byVideoIdAndUserId($this->video_id, $userId)->one();
     }
 
-    public function isDislikedBy(int $userId)
+    public function isDislikedBy($userId)
     {
         return VideoLike::find()->byDislike()->byVideoIdAndUserId($this->video_id, $userId)->one();
     }
