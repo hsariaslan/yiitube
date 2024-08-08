@@ -28,6 +28,15 @@ use yii\bootstrap5\NavBar;
             'linkOptions' => ['data-method' => 'post'],
         ];
     }
+    ?>
+    <div class="container-fluid w-75">
+        <form action="<?=\yii\helpers\Url::to(['/video/search'])?>" class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="keyword"
+            value="<?= Yii::$app->request->get('keyword') ?>">
+            <button class="btn btn-outline-danger">Search</button>
+        </form>
+    </div>
+    <?php
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,

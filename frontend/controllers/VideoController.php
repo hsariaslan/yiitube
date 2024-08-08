@@ -73,6 +73,23 @@ class VideoController extends Controller
         ]);
     }
 
+    public function actionSearch($keyword)
+    {
+        $query = Video::find()->published()->latest();
+
+        if ($keyword) {
+            $query->byKeyword($keyword);
+        }
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('search', [
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     public function actionLike($videoId)
     {
         $this->layout = 'view';
