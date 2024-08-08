@@ -27,9 +27,7 @@ use yii\helpers\Html;
             </div>
         </div>
         <div>
-            <p><?= Html::a($model->createdBy->username, [
-                    'channel/view', 'username' => $model->createdBy->username,
-                ]) ?></p>
+            <p><?= \common\helpers\Html::channelLink($model->createdBy) ?></p>
             <p>
                 <?=($model->description)
                     ? Html::encode($model->description)
